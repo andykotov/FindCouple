@@ -8,9 +8,34 @@
 import SwiftUI
 
 struct GameOver: View {
+    @EnvironmentObject var model: Model
+    
     @Binding var isPresented: Bool
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Spacer()
+            
+            VStack {
+                Text("Время вышло")
+                    .font(.title)
+                Text("Ваш счёт")
+                    .font(.subheadline)
+                Text("\(model.gameModel.score)")
+                    .font(.subheadline)
+                
+                Image("leaf")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100, alignment: .center)
+                    .padding()
+                
+                Text("Поробуйте ещё раз!")
+                    .padding()
+            }
+            .padding()
+            
+            Spacer()
+        }
     }
 }

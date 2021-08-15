@@ -14,12 +14,12 @@ struct ProgressBar: View {
     var body: some View {
         HStack {
             ZStack(alignment: .leading) {
-                Rectangle().frame(width: geo.size.width - 60 , height: 2)
+                Rectangle().frame(width: geo.size.width - 60 , height: 4)
                     .opacity(0.3)
-                    .foregroundColor(Color(UIColor.systemTeal))
+                    .foregroundColor(Color(UIColor.systemYellow))
                 
-                Rectangle().frame(width: min(CGFloat(self.value) * (geo.size.width - 60), geo.size.width - 60), height: 2)
-                    .foregroundColor(Color(UIColor.systemBlue))
+                Rectangle().frame(width: min(CGFloat(self.value) * (geo.size.width - 60), geo.size.width - 60), height: 4)
+                    .foregroundColor(Color(UIColor.systemOrange))
                     .animation(.linear)
             }
             .cornerRadius(45.0)

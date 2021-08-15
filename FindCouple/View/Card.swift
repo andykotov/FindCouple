@@ -18,11 +18,13 @@ struct Card: View {
     @Binding var localScore: Double
     @Binding var progressValue: Float
     @Binding var isGameOver: Bool
+    @Binding var nextLevel: Bool
     
     var cardWidth: CGFloat
     var cardHeight: CGFloat
     var indexArray: Int
     var cardIndex: Int
+    var geo: GeometryProxy
     
     var body: some View {
         VStack {
@@ -58,28 +60,25 @@ struct Card: View {
                                     }
                                 }
                             }
-                            localScore += 1
-                            print(localScore)
-                            if Int(localScore) == (model.cardBehavior.countCardRow * model.cardBehavior.countCardRow) - 1 {
-                                localScore = 0.0
-                                resetProgressBar()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + model.cardBehavior.closeAllCardsDelay) {
-                                    startRound()
-                                    
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + model.cardBehavior.closeAllCardsDelay) {
-                                        isOpened = false
-                                        startProgressBar()
-                                    }
-                                }
-                            }
-                //            card.isLocalOpened = true
                         } else {
                             card.isLocalOpened = false
-                            card.isMatched = false
                             matchArray = [String()]
-//                            localScore -= 1
                         }
                     }
+                    localScore = 0
+                    
+                    for row in cardModel {
+                        for item in row {
+                            if item.isLocalOpened || item.isMatched {
+                                localScore += 1
+                            }
+                        }
+                    }
+                    
+                    if Int(localScore) == (model.cardBehavior.countCardRow * model.cardBehavior.countCardRow) {
+                        nextLevel = true
+                    }
+                    
                 }){
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color.blue)
@@ -96,44 +95,4 @@ struct Card: View {
         }
     }
     
-    func startRound() {
-        var cardModelArray = [CardModel()]
-        let array = model.cardBehavior.finalArray
-        for index in 0..<array.count {
-            var cardModel = CardModel()
-            cardModel.id = index
-            cardModel.card = array[index]
-            cardModel.isLocalOpened = false
-            cardModelArray.append(cardModel)
-        }
-        let filtered = cardModelArray.filter({ $0.card != ""})
-        let chankedArray = filtered.chunked(into: model.cardBehavior.countCardRow)
-        cardModel = chankedArray
-    }
-    
-    func startProgressBar() {
-        var runCount = 0.0
-
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            self.progressValue += 0.0166
-            runCount += 0.0166
-
-            if runCount > 1.0 {
-                timer.invalidate()
-                resetProgressBar()
-                gameOver()
-            }
-        }
-    }
-    
-    func resetProgressBar() {
-        self.progressValue = 0.0
-    }
-    
-    func gameOver() {
-        isOpened = false
-        matchArray = [String()]
-        presentationMode.wrappedValue.dismiss()
-        isGameOver = true
-    }
 }

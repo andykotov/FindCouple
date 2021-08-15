@@ -9,5 +9,6 @@ import Foundation
 import SwiftUI
 
 struct GameModel {
-    @State var progressValue: Float = 0.0
+    var score = 0
+    var level = 1
 }

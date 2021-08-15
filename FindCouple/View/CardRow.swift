@@ -17,6 +17,7 @@ struct CardRow: View {
     @Binding var localScore: Double
     @Binding var progressValue: Float
     @Binding var isGameOver: Bool
+    @Binding var nextLevel: Bool
     
     var geo: GeometryProxy
     var indexArray: Int
@@ -24,7 +25,7 @@ struct CardRow: View {
     var body: some View {
         HStack {
             ForEach(0..<rowArray.count) { cardIndex in
-                Card(isOpened: $isOpened, matchArray: $matchArray, cardModel: $cardModel, card: $rowArray[cardIndex], localScore: $localScore, progressValue: $progressValue, isGameOver: $isGameOver, cardWidth: CGFloat(Int(geo.size.width) / model.cardBehavior.countCardRow - 20), cardHeight: CGFloat(Int(geo.size.width) / model.cardBehavior.countCardRow - 20), indexArray: indexArray, cardIndex: cardIndex)
+                Card(isOpened: $isOpened, matchArray: $matchArray, cardModel: $cardModel, card: $rowArray[cardIndex], localScore: $localScore, progressValue: $progressValue, isGameOver: $isGameOver, nextLevel: $nextLevel, cardWidth: CGFloat(Int(geo.size.width) / model.cardBehavior.countCardRow - 20), cardHeight: CGFloat(Int(geo.size.width) / model.cardBehavior.countCardRow - 20), indexArray: indexArray, cardIndex: cardIndex, geo: geo).environmentObject(model)
             }
         }
         

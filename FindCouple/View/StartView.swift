@@ -20,6 +20,16 @@ struct StartView: View {
             VStack {
                 Spacer()
                 
+                VStack {
+                    Text("Find Couple")
+                        .font(.title)
+                    Text("Ваш счёт")
+                        .font(.subheadline)
+                    Text("\(model.gameModel.score)")
+                        .font(.subheadline)
+                }
+                .padding()
+                
                 Image("split5")
                     .resizable()
                     .scaledToFit()
@@ -37,17 +47,18 @@ struct StartView: View {
                 .cornerRadius(10)
                 .padding()
                 
-                NavigationLink(destination: GameView(cardModel: $cardModelFinal, matchArray: $matchArray, isGameOver: $isGameOver, localScore: $localScore), isActive: $isShowingGameView) { EmptyView() }
+                NavigationLink(destination: GameView(isPresented: $isShowingGameView, cardModel: $cardModelFinal, matchArray: $matchArray, isGameOver: $isGameOver, localScore: $localScore).environmentObject(model), isActive: $isShowingGameView) { EmptyView() }
                 
                 Spacer()
             }
             .navigationBarTitle("")
             .navigationBarHidden(true)
             .onAppear(perform: {
+                model.gameModel.score = UserDefaults.standard.integer(forKey: "Score")
                 startRound()
             })
             .sheet(isPresented: $isGameOver) {
-                GameOver(isPresented: $isGameOver)
+                GameOver(isPresented: $isGameOver).environmentObject(model)
             }
         }
     }
