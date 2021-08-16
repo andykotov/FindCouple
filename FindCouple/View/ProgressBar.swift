@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProgressBar: View {
-    @Binding var value: Float
+    @Binding var value: Double
     var geo: GeometryProxy
     
     var body: some View {

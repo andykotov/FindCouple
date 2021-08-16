@@ -16,7 +16,7 @@ struct Card: View {
     @Binding var cardModel: [[CardModel]]
     @Binding var card: CardModel
     @Binding var localScore: Double
-    @Binding var progressValue: Float
+    @Binding var progressValue: Double
     @Binding var isGameOver: Bool
     @Binding var nextLevel: Bool
     
@@ -75,7 +75,9 @@ struct Card: View {
                         }
                     }
                     
-                    if Int(localScore) == (model.cardBehavior.countCardRow * model.cardBehavior.countCardRow) {
+                    let countMatch = (model.cardBehavior.countCardRow * model.cardBehavior.countCardRow) % 2 == 0 ? model.cardBehavior.countCardRow * model.cardBehavior.countCardRow : (model.cardBehavior.countCardRow * model.cardBehavior.countCardRow) - 1
+                    
+                    if Int(localScore) == countMatch {
                         nextLevel = true
                     }
                     

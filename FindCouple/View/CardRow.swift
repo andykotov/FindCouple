@@ -15,7 +15,7 @@ struct CardRow: View {
     @Binding var cardModel: [[CardModel]]
     @Binding var rowArray: [CardModel]
     @Binding var localScore: Double
-    @Binding var progressValue: Float
+    @Binding var progressValue: Double
     @Binding var isGameOver: Bool
     @Binding var nextLevel: Bool
     
@@ -24,7 +24,7 @@ struct CardRow: View {
     
     var body: some View {
         HStack {
-            ForEach(0..<rowArray.count) { cardIndex in
+            ForEach(0..<rowArray.count, id: \.self) { cardIndex in
                 Card(isOpened: $isOpened, matchArray: $matchArray, cardModel: $cardModel, card: $rowArray[cardIndex], localScore: $localScore, progressValue: $progressValue, isGameOver: $isGameOver, nextLevel: $nextLevel, cardWidth: CGFloat(Int(geo.size.width) / model.cardBehavior.countCardRow - 20), cardHeight: CGFloat(Int(geo.size.width) / model.cardBehavior.countCardRow - 20), indexArray: indexArray, cardIndex: cardIndex, geo: geo).environmentObject(model)
             }
         }

@@ -11,4 +11,5 @@ import SwiftUI
 struct GameModel {
     var score = 0
     var level = 1
+    var timeOfLevel = 0.5
 }

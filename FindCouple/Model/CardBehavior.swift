@@ -12,7 +12,7 @@ import SwiftUI
 struct CardBehavior {
     var closeCardDelay: Double = 1.0
     var closeAllCardsDelay: Double = 3.0
-    var countCardRow: Int = 4
+    var countCardRow: Int = 3
     var cardArray = ["banana", "banana2", "fruit", "fruit2", "fruit3", "harvest", "juice", "leaf", "milk", "shake", "split", "split2", "split3", "split4", "split5", "split6", "split7"]
 //    var matrix = [0, 1, 2, 3, 10, 11, 12, 13, 20, 21, 22, 23, 30, 31, 32, 33]
 //    @State var cardModelFinal = [[CardModel()]]

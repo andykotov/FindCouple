@@ -38,6 +38,8 @@ struct StartView: View {
                 
                 Button(action: {
                     self.isShowingGameView = true
+                    model.gameModel.score = 0
+                    model.gameModel.level = 1
                 }) {
                     Text("Начать игру")
                         .padding()

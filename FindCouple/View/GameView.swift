@@ -25,18 +25,24 @@ struct GameView: View {
     @Binding var localScore: Double
     
     @State var isOpened = true
-    @State var progressValue: Float = 0.0
+    @State var progressValue: Double = 0.0
     @State var nextLevel = false
     
     var body: some View {
         GeometryReader { geo in
             VStack {
-                ProgressBar(value: $progressValue, geo: geo).frame(height: 4)
+                
+                Text("\(Int(localScore / 2)) / \((model.cardBehavior.countCardRow * model.cardBehavior.countCardRow) / 2)")
+                    .font(.title)
                     .padding(.horizontal, 30)
                     .padding(.top, 20)
                 
+                ProgressBar(value: $progressValue, geo: geo).frame(height: 4)
+                    .padding(.horizontal, 30)
+                    .padding(.vertical, 20)
+                
                 VStack {
-                    ForEach(0..<cardModel.count) { indexArray in
+                    ForEach(0..<cardModel.count, id: \.self) { indexArray in
                         CardRow(isOpened: $isOpened, matchArray: $matchArray, cardModel: $cardModel, rowArray: $cardModel[indexArray], localScore: $localScore, progressValue: $progressValue, isGameOver: $isGameOver, nextLevel: $nextLevel, geo: geo, indexArray: indexArray).environmentObject(model)
                     }
                 }
@@ -47,9 +53,24 @@ struct GameView: View {
                     Button(action: {
                         nextLevel = false
                         model.gameModel.score += 1
-                        UserDefaults.standard.set(model.gameModel.score, forKey: "Score")
                         model.gameModel.level += 1
-//                        model.cardBehavior.countCardRow += 1
+                        localScore = 0.0
+                        
+                        if model.gameModel.level == 3 {
+                            model.gameModel.timeOfLevel = 1.0
+                            model.cardBehavior.countCardRow = 4
+                        } else if model.gameModel.level == 5 {
+                            model.cardBehavior.closeAllCardsDelay = 2.0
+                        } else if model.gameModel.level == 6 {
+                            model.gameModel.timeOfLevel = 0.5
+                        } else if model.gameModel.level == 7 {
+                            model.gameModel.timeOfLevel = 1.5
+                            model.cardBehavior.closeAllCardsDelay = 3.0
+                            model.cardBehavior.countCardRow = 5
+                        } else if model.gameModel.level == 9 {
+                            model.gameModel.timeOfLevel = 1.0
+                        }
+                        
                         startRound()
                         resetProgressBar()
                         isOpened = true
@@ -83,7 +104,7 @@ struct GameView: View {
     func startProgressBar() {
         var runCount = 0.0
 
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: model.gameModel.timeOfLevel, repeats: true) { timer in
             self.progressValue += 0.0166
             runCount += 0.0166
             
@@ -105,6 +126,10 @@ struct GameView: View {
     }
     
     func gameOver() {
+        let oldScore = UserDefaults.standard.integer(forKey: "Score")
+        if model.gameModel.score > oldScore {
+            UserDefaults.standard.set(model.gameModel.score, forKey: "Score")
+        }
         localScore = 0.0
         isOpened = false
         matchArray = [String()]
