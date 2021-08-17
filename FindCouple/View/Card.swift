@@ -13,8 +13,9 @@ struct Card: View {
     
     @Binding var isOpened: Bool
     @Binding var matchArray: [String]
-    @Binding var cardModel: [[CardModel]]
-    @Binding var card: CardModel
+//    @Binding var cardModel: [[CardModel]]
+    var array: [CardModel]
+    var card: CardModel
     @Binding var localScore: Double
     @Binding var progressValue: Double
     @Binding var isGameOver: Bool
@@ -22,8 +23,8 @@ struct Card: View {
     
     var cardWidth: CGFloat
     var cardHeight: CGFloat
-    var indexArray: Int
-    var cardIndex: Int
+//    var indexArray: Int
+//    var cardIndex: Int
     var geo: GeometryProxy
     
     var body: some View {
@@ -46,28 +47,32 @@ struct Card: View {
                 )
             } else {
                 Button(action: {
-                    card.isLocalOpened = true
+                    guard let indexRow = model.cardBehavior.cardModel.firstIndex(where: { $0 == array }) else { return }
+                    guard let indexItem = model.cardBehavior.cardModel[indexRow].firstIndex(where: { $0 == card }) else { return }
+                    
+                    model.cardBehavior.cardModel[indexRow][indexItem].isLocalOpened = true
                     matchArray.append(card.card)
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + model.cardBehavior.closeCardDelay) {
                         if matchArray.filter({ $0 == card.card }).count == 2 {
-                            for row in cardModel {
+                            for row in model.cardBehavior.cardModel {
                                 for item in row {
                                     if item.card == card.card {
-                                        guard let indexRow = cardModel.firstIndex(where: { $0 == row }) else { return }
-                                        guard let indexItem = cardModel[indexRow].firstIndex(where: { $0 == item }) else { return }
-                                        cardModel[indexRow][indexItem].isMatched = true
+                                        guard let indexRow = model.cardBehavior.cardModel.firstIndex(where: { $0 == row }) else { return }
+                                        guard let indexItem = model.cardBehavior.cardModel[indexRow].firstIndex(where: { $0 == item }) else { return }
+                                        
+                                        model.cardBehavior.cardModel[indexRow][indexItem].isMatched = true
                                     }
                                 }
                             }
                         } else {
-                            card.isLocalOpened = false
+                            model.cardBehavior.cardModel[indexRow][indexItem].isLocalOpened = false
                             matchArray = [String()]
                         }
                     }
                     localScore = 0
                     
-                    for row in cardModel {
+                    for row in model.cardBehavior.cardModel {
                         for item in row {
                             if item.isLocalOpened || item.isMatched {
                                 localScore += 1

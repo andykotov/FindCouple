@@ -19,10 +19,15 @@ struct GameOver: View {
             VStack {
                 Text("Время вышло")
                     .font(.title)
-                Text("Ваш счёт")
-                    .font(.subheadline)
+                    .padding(10)
+                Text("Ваш текущий счёт")
+                Text("\(model.gameModel.localScore)")
+                    .font(.title)
+                    .padding(10)
+                Text("Ваш лучший счёт")
                 Text("\(model.gameModel.score)")
-                    .font(.subheadline)
+                    .font(.title)
+                    .padding(10)
                 
                 Image("leaf")
                     .resizable()

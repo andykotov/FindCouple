@@ -12,6 +12,9 @@ struct ContentView: View {
     
     var body: some View {
         StartView().environmentObject(model)
+            .onAppear(perform: {
+                model.gameModel.score = UserDefaults.standard.integer(forKey: "Score")
+            })
     }
 }
 

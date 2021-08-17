@@ -19,7 +19,7 @@ struct GameView: View {
     @EnvironmentObject var model: Model
     
     @Binding var isPresented: Bool
-    @Binding var cardModel: [[CardModel]]
+//    @Binding var cardModel: [[CardModel]]
     @Binding var matchArray: [String]
     @Binding var isGameOver: Bool
     @Binding var localScore: Double
@@ -42,8 +42,8 @@ struct GameView: View {
                     .padding(.vertical, 20)
                 
                 VStack {
-                    ForEach(0..<cardModel.count, id: \.self) { indexArray in
-                        CardRow(isOpened: $isOpened, matchArray: $matchArray, cardModel: $cardModel, rowArray: $cardModel[indexArray], localScore: $localScore, progressValue: $progressValue, isGameOver: $isGameOver, nextLevel: $nextLevel, geo: geo, indexArray: indexArray).environmentObject(model)
+                    ForEach(model.cardBehavior.cardModel, id: \.self) { array in
+                        CardRow(isOpened: $isOpened, matchArray: $matchArray, array: array, localScore: $localScore, progressValue: $progressValue, isGameOver: $isGameOver, nextLevel: $nextLevel, geo: geo).environmentObject(model)
                     }
                 }
                 .padding(.horizontal, 10)
@@ -52,11 +52,11 @@ struct GameView: View {
                 if nextLevel {
                     Button(action: {
                         nextLevel = false
-                        model.gameModel.score += 1
+                        model.gameModel.localScore += 1
                         model.gameModel.level += 1
                         localScore = 0.0
                         
-                        if model.gameModel.level == 3 {
+                       if model.gameModel.level == 3 {
                             model.gameModel.timeOfLevel = 1.0
                             model.cardBehavior.countCardRow = 4
                         } else if model.gameModel.level == 5 {
@@ -115,8 +115,8 @@ struct GameView: View {
 
             if runCount > 1.0 && !nextLevel {
                 timer.invalidate()
-                resetProgressBar()
                 gameOver()
+                resetProgressBar()
             }
         }
     }
@@ -127,12 +127,13 @@ struct GameView: View {
     
     func gameOver() {
         let oldScore = UserDefaults.standard.integer(forKey: "Score")
-        if model.gameModel.score > oldScore {
+        if model.gameModel.localScore > oldScore {
             UserDefaults.standard.set(model.gameModel.score, forKey: "Score")
         }
         localScore = 0.0
-        isOpened = false
         matchArray = [String()]
+        progressValue = 0.0
+        isOpened = false
         isPresented = false
         isGameOver = true
     }
@@ -149,6 +150,6 @@ struct GameView: View {
         }
         let filtered = cardModelArray.filter({ $0.card != ""})
         let chankedArray = filtered.chunked(into: model.cardBehavior.countCardRow)
-        cardModel = chankedArray
+        model.cardBehavior.cardModel = chankedArray
     }
 }

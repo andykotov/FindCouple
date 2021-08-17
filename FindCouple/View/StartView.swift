@@ -9,9 +9,10 @@ import SwiftUI
 
 struct StartView: View {
     @EnvironmentObject var model: Model
+    
     @State private var isShowingGameView = false
     @State var matchArray = [String()]
-    @State var cardModelFinal = [[CardModel()]]
+//    @State var cardModel = [[CardModel()]]
     @State var isGameOver = false
     @State var localScore = 0.0
     
@@ -23,10 +24,11 @@ struct StartView: View {
                 VStack {
                     Text("Find Couple")
                         .font(.title)
-                    Text("Ваш счёт")
-                        .font(.subheadline)
+                        .padding(10)
+                    Text("Ваш лучший счёт")
                     Text("\(model.gameModel.score)")
-                        .font(.subheadline)
+                        .font(.title)
+                        .padding(10)
                 }
                 .padding()
                 
@@ -38,8 +40,6 @@ struct StartView: View {
                 
                 Button(action: {
                     self.isShowingGameView = true
-                    model.gameModel.score = 0
-                    model.gameModel.level = 1
                 }) {
                     Text("Начать игру")
                         .padding()
@@ -49,17 +49,16 @@ struct StartView: View {
                 .cornerRadius(10)
                 .padding()
                 
-                NavigationLink(destination: GameView(isPresented: $isShowingGameView, cardModel: $cardModelFinal, matchArray: $matchArray, isGameOver: $isGameOver, localScore: $localScore).environmentObject(model), isActive: $isShowingGameView) { EmptyView() }
+                NavigationLink(destination: GameView(isPresented: $isShowingGameView, matchArray: $matchArray, isGameOver: $isGameOver, localScore: $localScore).environmentObject(model), isActive: $isShowingGameView) { EmptyView() }
                 
                 Spacer()
             }
             .navigationBarTitle("")
             .navigationBarHidden(true)
             .onAppear(perform: {
-                model.gameModel.score = UserDefaults.standard.integer(forKey: "Score")
                 startRound()
             })
-            .sheet(isPresented: $isGameOver) {
+            .sheet(isPresented: $isGameOver, onDismiss: resetGame) {
                 GameOver(isPresented: $isGameOver).environmentObject(model)
             }
         }
@@ -77,7 +76,17 @@ struct StartView: View {
         }
         let filtered = cardModelArray.filter({ $0.card != ""})
         let chankedArray = filtered.chunked(into: model.cardBehavior.countCardRow)
-        cardModelFinal = chankedArray
+        model.cardBehavior.cardModel = chankedArray
+    }
+    
+    func resetGame() {
+        model.gameModel.level = 1
+        model.cardBehavior.closeAllCardsDelay = 3.0
+        model.cardBehavior.countCardRow = 3
+        model.gameModel.timeOfLevel = 0.5
+        
+        model.cardBehavior.cardModel = [[CardModel()]]
+        startRound()
     }
 }
 
