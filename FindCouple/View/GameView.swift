@@ -39,7 +39,7 @@ struct GameView: View {
                 
                 ProgressBar(value: $progressValue, geo: geo).frame(height: 4)
                     .padding(.horizontal, 30)
-                    .padding(.vertical, 20)
+                    .padding(.top, 20)
                 
                 VStack {
                     ForEach(model.cardBehavior.cardModel, id: \.self) { array in

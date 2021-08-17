@@ -27,7 +27,7 @@ struct GameOver: View {
                 Text("Ваш лучший счёт")
                 Text("\(model.gameModel.score)")
                     .font(.title)
-                    .padding(10)
+                    .padding(.vertical, 10)
                 
                 Image("leaf")
                     .resizable()

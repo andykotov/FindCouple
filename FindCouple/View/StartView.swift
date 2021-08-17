@@ -28,7 +28,7 @@ struct StartView: View {
                     Text("Ваш лучший счёт")
                     Text("\(model.gameModel.score)")
                         .font(.title)
-                        .padding(10)
+                        .padding(.top, 10)
                 }
                 .padding()
                 
@@ -39,6 +39,7 @@ struct StartView: View {
                     .padding()
                 
                 Button(action: {
+                    startRound()
                     self.isShowingGameView = true
                 }) {
                     Text("Начать игру")
@@ -56,7 +57,7 @@ struct StartView: View {
             .navigationBarTitle("")
             .navigationBarHidden(true)
             .onAppear(perform: {
-                startRound()
+//                startRound()
             })
             .sheet(isPresented: $isGameOver, onDismiss: resetGame) {
                 GameOver(isPresented: $isGameOver).environmentObject(model)
