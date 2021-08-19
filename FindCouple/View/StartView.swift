@@ -11,6 +11,7 @@ struct StartView: View {
     @EnvironmentObject var model: Model
     
     @State private var isShowingGameView = false
+    @State private var isShowingGameStore = false
     @State var matchArray = [String()]
 //    @State var cardModel = [[CardModel()]]
     @State var isGameOver = false
@@ -23,14 +24,16 @@ struct StartView: View {
                 
                 VStack {
                     Text("Find Couple")
-                        .font(.title)
-                        .padding(10)
-                    Text("Ваш лучший счёт")
-                    Text("\(model.gameModel.score)")
-                        .font(.title)
-                        .padding(.top, 10)
+                        .font(.system(size: 30))
+                        .fontWeight(.bold)
+                    if model.gameModel.score != 0 {
+                        Text("Ваш лучший счёт")
+                            .padding(.top, 10)
+                        Text("\(model.gameModel.localScore > model.gameModel.score ? model.gameModel.localScore : model.gameModel.score)")
+                            .font(.title)
+                            .padding(.top, 10)
+                    }
                 }
-                .padding()
                 
                 Image("split5")
                     .resizable()
@@ -43,18 +46,39 @@ struct StartView: View {
                     self.isShowingGameView = true
                 }) {
                     Text("Начать игру")
+                        .font(.headline)
                         .padding()
                         .foregroundColor(Color.white)
                 }
+                .frame(width: 200)
                 .background(Color.green)
                 .cornerRadius(10)
-                .padding()
+                
+                Button(action: {
+                    
+                    self.isShowingGameStore = true
+                }) {
+                    Text("Магазин")
+                        .font(.headline)
+                        .padding()
+                        .foregroundColor(Color.white)
+                }
+                .frame(width: 200)
+                .background(Color.blue)
+                .cornerRadius(10)
+                .padding(.top, 10)
                 
                 NavigationLink(destination: GameView(isPresented: $isShowingGameView, matchArray: $matchArray, isGameOver: $isGameOver, localScore: $localScore).environmentObject(model), isActive: $isShowingGameView) { EmptyView() }
                 
+                NavigationLink(destination: GameStore(isPresented: $isShowingGameStore), isActive: $isShowingGameStore) { EmptyView() }
+                
+                NavigationLink(destination: EmptyView()) {
+                    EmptyView()
+                }
+                
                 Spacer()
             }
-            .navigationBarTitle("")
+            .navigationBarTitle("Назад")
             .navigationBarHidden(true)
             .onAppear(perform: {
 //                startRound()

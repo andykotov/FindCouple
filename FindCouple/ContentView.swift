@@ -5,6 +5,7 @@
 //  Created by mr. Hakoda on 13.08.2021.
 //
 
+import GoogleMobileAds
 import SwiftUI
 
 struct ContentView: View {
@@ -14,6 +15,8 @@ struct ContentView: View {
         StartView().environmentObject(model)
             .onAppear(perform: {
                 model.gameModel.score = UserDefaults.standard.integer(forKey: "Score")
+                
+                GADMobileAds.sharedInstance().start(completionHandler: nil)
             })
     }
 }

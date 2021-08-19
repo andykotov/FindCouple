@@ -89,6 +89,10 @@ struct GameView: View {
                 }
                 
                 Spacer()
+                
+                BannerView()
+                
+                Spacer()
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -126,10 +130,13 @@ struct GameView: View {
     }
     
     func gameOver() {
-        let oldScore = UserDefaults.standard.integer(forKey: "Score")
-        if model.gameModel.localScore > oldScore {
-            UserDefaults.standard.set(model.gameModel.score, forKey: "Score")
+        model.gameModel.score = UserDefaults.standard.integer(forKey: "Score")
+        
+        if model.gameModel.localScore > model.gameModel.score {
+            UserDefaults.standard.set(model.gameModel.localScore, forKey: "Score")
+            model.gameModel.score = model.gameModel.localScore
         }
+        
         localScore = 0.0
         matchArray = [String()]
         progressValue = 0.0

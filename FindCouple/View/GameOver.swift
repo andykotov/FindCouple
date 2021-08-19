@@ -25,7 +25,7 @@ struct GameOver: View {
                     .font(.title)
                     .padding(10)
                 Text("Ваш лучший счёт")
-                Text("\(model.gameModel.score)")
+                Text("\(model.gameModel.localScore > model.gameModel.score ? model.gameModel.localScore : model.gameModel.score)")
                     .font(.title)
                     .padding(.vertical, 10)
                 
