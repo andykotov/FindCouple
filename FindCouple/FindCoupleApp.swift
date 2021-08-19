@@ -19,7 +19,20 @@ struct FindCoupleApp: App {
             if model.gameBehavior.geo == "UA" {
                 ContentView().environmentObject(model)
             } else if model.gameBehavior.geo == "RU"  {
-                Text("Test")
+                WebViewContainer(model: model)
+                    .navigationBarTitle(Text(model.gameBehavior.title), displayMode: .inline)
+                    .navigationBarItems(leading: Button(action: {
+                        model.gameBehavior.shouldGoBack.toggle()
+                    }, label: {
+                        if model.gameBehavior.canGoBack {
+                            Image(systemName: "arrow.left")
+                                .frame(width: 44, height: 44, alignment: .center)
+                        } else {
+                            EmptyView()
+                                .frame(width: 0, height: 0, alignment: .center)
+                        }
+                    })
+                    )
             }
             
         }
