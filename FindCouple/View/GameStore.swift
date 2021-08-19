@@ -11,7 +11,7 @@ struct GameStore: View {
     @Binding var isPresented: Bool
     
     var body: some View {
-        VStack(alignment: .leading) {
+        List {
             HStack {
                 VStack(alignment: .leading) {
                     Text("Отключить рекламу")
@@ -19,7 +19,9 @@ struct GameStore: View {
                     
                     Text("Вся реклама в приложении будет отключена раз и навсегда")
                         .font(.subheadline)
-                        .padding(.top, 10)
+                        .padding(.vertical, 1)
+                    
+                    Text("Купить за 5 $")
                 }
                 .padding(.trailing, 10)
                 
@@ -37,9 +39,8 @@ struct GameStore: View {
                 .background(Color.blue)
                 .cornerRadius(10)
             }
-            .padding()
-            
-            Divider()
+            .padding(.vertical, 10)
+            .padding(.horizontal)
             
             HStack {
                 VStack(alignment: .leading) {
@@ -48,7 +49,9 @@ struct GameStore: View {
                     
                     Text("После активации время будет заморожено на 30 секунд")
                         .font(.subheadline)
-                        .padding(.top, 10)
+                        .padding(.vertical, 1)
+                    
+                    Text("Купить за 1 $")
                 }
                 .padding(.trailing, 10)
                 
@@ -66,9 +69,8 @@ struct GameStore: View {
                 .background(Color.blue)
                 .cornerRadius(10)
             }
-            .padding()
-            
-            Divider()
+            .padding(.vertical, 10)
+            .padding(.horizontal)
             
             HStack {
                 VStack(alignment: .leading) {
@@ -77,7 +79,9 @@ struct GameStore: View {
                     
                     Text("После активации текущий уровень будет завершен автоматически")
                         .font(.subheadline)
-                        .padding(.top, 10)
+                        .padding(.vertical, 1)
+                    
+                    Text("Купить за 2 $")
                 }
                 .padding(.trailing, 10)
                 
@@ -95,11 +99,8 @@ struct GameStore: View {
                 .background(Color.blue)
                 .cornerRadius(10)
             }
-            .padding()
-            
-            Divider()
-            
-            Spacer()
+            .padding(.vertical, 10)
+            .padding(.horizontal)
         }
         .navigationBarTitle("Магазин", displayMode: .inline)
 //        .navigationBarBackButtonHidden(true)
