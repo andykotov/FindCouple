@@ -26,10 +26,10 @@ struct StartView: View {
                     Text("Find Couple")
                         .font(.system(size: 30))
                         .fontWeight(.bold)
-                    if model.gameModel.score != 0 {
+                    if model.gameBehavior.score != 0 {
                         Text("Ваш лучший счёт")
                             .padding(.top, 10)
-                        Text("\(model.gameModel.localScore > model.gameModel.score ? model.gameModel.localScore : model.gameModel.score)")
+                        Text("\(model.gameBehavior.localScore > model.gameBehavior.score ? model.gameBehavior.localScore : model.gameBehavior.score)")
                             .font(.title)
                             .padding(.top, 10)
                     }
@@ -105,10 +105,10 @@ struct StartView: View {
     }
     
     func resetGame() {
-        model.gameModel.level = 1
+        model.gameBehavior.level = 1
         model.cardBehavior.closeAllCardsDelay = 3.0
         model.cardBehavior.countCardRow = 3
-        model.gameModel.timeOfLevel = 0.5
+        model.gameBehavior.timeOfLevel = 0.5
         
         model.cardBehavior.cardModel = [[CardModel()]]
         startRound()

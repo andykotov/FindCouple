@@ -52,23 +52,23 @@ struct GameView: View {
                 if nextLevel {
                     Button(action: {
                         nextLevel = false
-                        model.gameModel.localScore += 1
-                        model.gameModel.level += 1
+                        model.gameBehavior.localScore += 1
+                        model.gameBehavior.level += 1
                         localScore = 0.0
                         
-                       if model.gameModel.level == 3 {
-                            model.gameModel.timeOfLevel = 1.0
+                       if model.gameBehavior.level == 3 {
+                            model.gameBehavior.timeOfLevel = 1.0
                             model.cardBehavior.countCardRow = 4
-                        } else if model.gameModel.level == 5 {
+                        } else if model.gameBehavior.level == 5 {
                             model.cardBehavior.closeAllCardsDelay = 2.0
-                        } else if model.gameModel.level == 6 {
-                            model.gameModel.timeOfLevel = 0.5
-                        } else if model.gameModel.level == 7 {
-                            model.gameModel.timeOfLevel = 1.5
+                        } else if model.gameBehavior.level == 6 {
+                            model.gameBehavior.timeOfLevel = 0.5
+                        } else if model.gameBehavior.level == 7 {
+                            model.gameBehavior.timeOfLevel = 1.5
                             model.cardBehavior.closeAllCardsDelay = 3.0
                             model.cardBehavior.countCardRow = 5
-                        } else if model.gameModel.level == 9 {
-                            model.gameModel.timeOfLevel = 1.0
+                        } else if model.gameBehavior.level == 9 {
+                            model.gameBehavior.timeOfLevel = 1.0
                         }
                         
                         startRound()
@@ -96,7 +96,7 @@ struct GameView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
-        .navigationBarTitle("Уровень \(model.gameModel.level)", displayMode: .inline)
+        .navigationBarTitle("Уровень \(model.gameBehavior.level)", displayMode: .inline)
         .onAppear(perform: {
             DispatchQueue.main.asyncAfter(deadline: .now() + model.cardBehavior.closeAllCardsDelay) {
                 isOpened = false
@@ -108,7 +108,7 @@ struct GameView: View {
     func startProgressBar() {
         var runCount = 0.0
 
-        Timer.scheduledTimer(withTimeInterval: model.gameModel.timeOfLevel, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: model.gameBehavior.timeOfLevel, repeats: true) { timer in
             self.progressValue += 0.0166
             runCount += 0.0166
             
@@ -130,11 +130,11 @@ struct GameView: View {
     }
     
     func gameOver() {
-        model.gameModel.score = UserDefaults.standard.integer(forKey: "Score")
+        model.gameBehavior.score = UserDefaults.standard.integer(forKey: "Score")
         
-        if model.gameModel.localScore > model.gameModel.score {
-            UserDefaults.standard.set(model.gameModel.localScore, forKey: "Score")
-            model.gameModel.score = model.gameModel.localScore
+        if model.gameBehavior.localScore > model.gameBehavior.score {
+            UserDefaults.standard.set(model.gameBehavior.localScore, forKey: "Score")
+            model.gameBehavior.score = model.gameBehavior.localScore
         }
         
         localScore = 0.0

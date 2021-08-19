@@ -9,12 +9,12 @@ import GoogleMobileAds
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var model = Model()
+    @EnvironmentObject var model: Model
     
     var body: some View {
-        StartView().environmentObject(model)
+        StartView()
             .onAppear(perform: {
-                model.gameModel.score = UserDefaults.standard.integer(forKey: "Score")
+                model.gameBehavior.score = UserDefaults.standard.integer(forKey: "Score")
                 
                 GADMobileAds.sharedInstance().start(completionHandler: nil)
             })

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18017FF326C912C3004A6C4B /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18017FF226C912C3004A6C4B /* ProgressBar.swift */; };
-		18017FF526C9134A004A6C4B /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18017FF426C9134A004A6C4B /* GameModel.swift */; };
+		18017FF526C9134A004A6C4B /* GameBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18017FF426C9134A004A6C4B /* GameBehavior.swift */; };
 		186290DA26CE77640072DDBE /* BunnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186290D926CE77640072DDBE /* BunnerView.swift */; };
 		18777CB526CC37230069CE71 /* GameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18777CB426CC37230069CE71 /* GameStore.swift */; };
 		18E6DC6B26C96CB100E5FE4F /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6DC6A26C96CB100E5FE4F /* GameOver.swift */; };
@@ -40,7 +40,7 @@
 
 /* Begin PBXFileReference section */
 		18017FF226C912C3004A6C4B /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
-		18017FF426C9134A004A6C4B /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		18017FF426C9134A004A6C4B /* GameBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBehavior.swift; sourceTree = "<group>"; };
 		186290D926CE77640072DDBE /* BunnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunnerView.swift; sourceTree = "<group>"; };
 		18777CB426CC37230069CE71 /* GameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStore.swift; sourceTree = "<group>"; };
 		18E6DC6A26C96CB100E5FE4F /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 			children = (
 				18F8B8EA26C678B80094A9EA /* Model.swift */,
 				18F8B8F626C690AE0094A9EA /* CardBehavior.swift */,
-				18017FF426C9134A004A6C4B /* GameModel.swift */,
+				18017FF426C9134A004A6C4B /* GameBehavior.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -276,7 +276,7 @@
 				18F8B8DC26C672500094A9EA /* ContentView.swift in Sources */,
 				18F8B8F726C690AE0094A9EA /* CardBehavior.swift in Sources */,
 				18F8B8ED26C679070094A9EA /* StartView.swift in Sources */,
-				18017FF526C9134A004A6C4B /* GameModel.swift in Sources */,
+				18017FF526C9134A004A6C4B /* GameBehavior.swift in Sources */,
 				18E6DC6B26C96CB100E5FE4F /* GameOver.swift in Sources */,
 				18F8B8DA26C672500094A9EA /* FindCoupleApp.swift in Sources */,
 				18017FF326C912C3004A6C4B /* ProgressBar.swift in Sources */,

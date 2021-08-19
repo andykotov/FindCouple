@@ -9,6 +9,6 @@ import Foundation
 
 public class Model: ObservableObject {
     @Published var cardBehavior = CardBehavior()
-    @Published var gameModel = GameModel()
+    @Published var gameBehavior = GameBehavior()
     
 }
