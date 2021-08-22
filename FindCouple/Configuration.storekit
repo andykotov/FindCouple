@@ -1,0 +1,58 @@
+{
+  "identifier" : "D6780FB5",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "F65744BE",
+      "localizations" : [
+        {
+          "description" : "Вся реклама в приложении будет отключена",
+          "displayName" : "Отключить рекламу",
+          "locale" : "ru"
+        },
+        {
+          "description" : "All ads in the app will be disabled",
+          "displayName" : "Disable ads",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "DisableAdvertise",
+      "referenceName" : "Disable Advertise",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "B73DF192",
+      "localizations" : [
+        {
+          "description" : "Текущий уровень будет завершен автоматически",
+          "displayName" : "Пропустить уровень",
+          "locale" : "ru"
+        },
+        {
+          "description" : "The current level will be completed automatic",
+          "displayName" : "Skip level",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "SkipLevel1",
+      "referenceName" : "Skip level",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 1
+  }
+}

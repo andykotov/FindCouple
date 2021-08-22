@@ -9,110 +9,65 @@ import SwiftUI
 
 struct GameStore: View {
     @Binding var isPresented: Bool
+    @StateObject var storeManager: StoreManager
     
     var body: some View {
-        List {
+        List(storeManager.myProducts, id: \.self) { product in
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Отключить рекламу")
+                    Text(product.localizedTitle)
                         .font(.headline)
                     
-                    Text("Вся реклама в приложении будет отключена раз и навсегда")
+                    Text(product.localizedDescription)
                         .font(.subheadline)
                         .padding(.vertical, 1)
                     
-                    Text("Купить за 5 $")
+                    Text("Купить за \(product.price) $")
                 }
                 .padding(.trailing, 10)
                 
                 Spacer()
                 
-                Button(action: {
+                if UserDefaults.standard.bool(forKey: product.productIdentifier) {
+                    Button(action: {
+                        
+                    }) {
+                        Image(systemName: "checkmark.circle")
+                            .foregroundColor(Color.white)
+                            .imageScale(.large)
+                            .frame(width: 24, height: 24, alignment: .center)
+                            .padding()
+                    }
+                    .background(Color.green)
+                    .cornerRadius(10)
+                    .disabled(true)
                     
-                }) {
-                    Image(systemName: "cart")
-                        .foregroundColor(Color.white)
-                        .imageScale(.large)
-                        .frame(width: 24, height: 24, alignment: .center)
-                        .padding()
+                } else {
+                    Button(action: {
+                        storeManager.purchaseProduct(product: product)
+                    }) {
+                        Image(systemName: "cart")
+                            .foregroundColor(Color.white)
+                            .imageScale(.large)
+                            .frame(width: 24, height: 24, alignment: .center)
+                            .padding()
+                    }
+                    .background(Color.blue)
+                    .cornerRadius(10)
                 }
-                .background(Color.blue)
-                .cornerRadius(10)
-            }
-            .padding(.vertical, 10)
-            .padding(.horizontal)
-            
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Замороить время")
-                        .font(.headline)
-                    
-                    Text("После активации время будет заморожено на 30 секунд")
-                        .font(.subheadline)
-                        .padding(.vertical, 1)
-                    
-                    Text("Купить за 1 $")
-                }
-                .padding(.trailing, 10)
-                
-                Spacer()
-                
-                Button(action: {
-                    
-                }) {
-                    Image(systemName: "timer")
-                        .foregroundColor(Color.white)
-                        .imageScale(.large)
-                        .frame(width: 24, height: 24, alignment: .center)
-                        .padding()
-                }
-                .background(Color.blue)
-                .cornerRadius(10)
-            }
-            .padding(.vertical, 10)
-            .padding(.horizontal)
-            
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Пропустить уровень")
-                        .font(.headline)
-                    
-                    Text("После активации текущий уровень будет завершен автоматически")
-                        .font(.subheadline)
-                        .padding(.vertical, 1)
-                    
-                    Text("Купить за 2 $")
-                }
-                .padding(.trailing, 10)
-                
-                Spacer()
-                
-                Button(action: {
-                    
-                }) {
-                    Image(systemName: "arrow.forward.circle")
-                        .foregroundColor(Color.white)
-                        .imageScale(.large)
-                        .frame(width: 24, height: 24, alignment: .center)
-                        .padding()
-                }
-                .background(Color.blue)
-                .cornerRadius(10)
             }
             .padding(.vertical, 10)
             .padding(.horizontal)
         }
         .navigationBarTitle("Магазин", displayMode: .inline)
-//        .navigationBarBackButtonHidden(true)
-//        .navigationBarItems(leading:
-//            Button(action: {
-//                self.isPresented = false
-//            }){
-//            Image(systemName: "arrow.left")
-//                .imageScale(.medium)
-//                .frame(width: 24, height: 24, alignment: .center)
-//                .padding([.vertical, .trailing])
+//        .toolbar(content: {
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                Button(action: {
+//                    //Restore products already purchased
+//                }) {
+//                    Text("Восстановить")
+//                }
 //            }
-//        )
+//        })
     }
 }

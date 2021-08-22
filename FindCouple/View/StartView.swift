@@ -10,6 +10,8 @@ import SwiftUI
 struct StartView: View {
     @EnvironmentObject var model: Model
     
+    @StateObject var storeManager: StoreManager
+    
     @State private var isShowingGameView = false
     @State private var isShowingGameStore = false
     @State var matchArray = [String()]
@@ -68,9 +70,9 @@ struct StartView: View {
                 .cornerRadius(10)
                 .padding(.top, 10)
                 
-                NavigationLink(destination: GameView(isPresented: $isShowingGameView, matchArray: $matchArray, isGameOver: $isGameOver, localScore: $localScore).environmentObject(model), isActive: $isShowingGameView) { EmptyView() }
+                NavigationLink(destination: GameView(isPresented: $isShowingGameView, matchArray: $matchArray, isGameOver: $isGameOver, localScore: $localScore, storeManager: storeManager).environmentObject(model), isActive: $isShowingGameView) { EmptyView() }
                 
-                NavigationLink(destination: GameStore(isPresented: $isShowingGameStore), isActive: $isShowingGameStore) { EmptyView() }
+                NavigationLink(destination: GameStore(isPresented: $isShowingGameStore, storeManager: storeManager), isActive: $isShowingGameStore) { EmptyView() }
                 
                 NavigationLink(destination: EmptyView()) {
                     EmptyView()
@@ -112,11 +114,5 @@ struct StartView: View {
         
         model.cardBehavior.cardModel = [[CardModel()]]
         startRound()
-    }
-}
-
-struct StartView_Previews: PreviewProvider {
-    static var previews: some View {
-        StartView()
     }
 }

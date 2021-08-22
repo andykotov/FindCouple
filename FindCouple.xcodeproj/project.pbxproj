@@ -13,6 +13,8 @@
 		186290DA26CE77640072DDBE /* BunnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186290D926CE77640072DDBE /* BunnerView.swift */; };
 		18777CB526CC37230069CE71 /* GameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18777CB426CC37230069CE71 /* GameStore.swift */; };
 		18E6DC6B26C96CB100E5FE4F /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6DC6A26C96CB100E5FE4F /* GameOver.swift */; };
+		18F7187B26D02989002B3308 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F7187A26D02989002B3308 /* StoreKit.framework */; };
+		18F7187D26D029E7002B3308 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7187C26D029E7002B3308 /* StoreManager.swift */; };
 		18F8B8DA26C672500094A9EA /* FindCoupleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8B8D926C672500094A9EA /* FindCoupleApp.swift */; };
 		18F8B8DC26C672500094A9EA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8B8DB26C672500094A9EA /* ContentView.swift */; };
 		18F8B8DE26C672520094A9EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18F8B8DD26C672520094A9EA /* Assets.xcassets */; };
@@ -43,9 +45,12 @@
 		18017FF226C912C3004A6C4B /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		18017FF426C9134A004A6C4B /* GameBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBehavior.swift; sourceTree = "<group>"; };
 		182E66EF26CEEEBD00CF23C2 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		182F25BF26D23E2000014A8F /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		186290D926CE77640072DDBE /* BunnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunnerView.swift; sourceTree = "<group>"; };
 		18777CB426CC37230069CE71 /* GameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStore.swift; sourceTree = "<group>"; };
 		18E6DC6A26C96CB100E5FE4F /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		18F7187A26D02989002B3308 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		18F7187C26D029E7002B3308 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		18F8B8D626C672500094A9EA /* FindCouple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindCouple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F8B8D926C672500094A9EA /* FindCoupleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCoupleApp.swift; sourceTree = "<group>"; };
 		18F8B8DB26C672500094A9EA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -69,6 +74,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB48641B2595C2F227ED6D01 /* Pods_FindCouple.framework in Frameworks */,
+				18F7187B26D02989002B3308 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +109,7 @@
 				18F8B8DD26C672520094A9EA /* Assets.xcassets */,
 				18F8B8E226C672520094A9EA /* Info.plist */,
 				18F8B8DF26C672520094A9EA /* Preview Content */,
+				182F25BF26D23E2000014A8F /* Configuration.storekit */,
 			);
 			path = FindCouple;
 			sourceTree = "<group>";
@@ -121,6 +128,7 @@
 				18F8B8EA26C678B80094A9EA /* Model.swift */,
 				18F8B8F626C690AE0094A9EA /* CardBehavior.swift */,
 				18017FF426C9134A004A6C4B /* GameBehavior.swift */,
+				18F7187C26D029E7002B3308 /* StoreManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -153,6 +161,7 @@
 		ED33829386BB4D2CB4675E5E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18F7187A26D02989002B3308 /* StoreKit.framework */,
 				28F3B258FF5FC709438277D7 /* Pods_FindCouple.framework */,
 			);
 			name = Frameworks;
@@ -284,6 +293,7 @@
 				18F8B8DA26C672500094A9EA /* FindCoupleApp.swift in Sources */,
 				18017FF326C912C3004A6C4B /* ProgressBar.swift in Sources */,
 				18F8B8EF26C67FCD0094A9EA /* GameView.swift in Sources */,
+				18F7187D26D029E7002B3308 /* StoreManager.swift in Sources */,
 				186290DA26CE77640072DDBE /* BunnerView.swift in Sources */,
 				182E66F026CEEEBD00CF23C2 /* WebView.swift in Sources */,
 			);

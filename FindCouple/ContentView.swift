@@ -10,19 +10,14 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var model: Model
+    @StateObject var storeManager: StoreManager
     
     var body: some View {
-        StartView()
+        StartView(storeManager: storeManager)
             .onAppear(perform: {
                 model.gameBehavior.score = UserDefaults.standard.integer(forKey: "Score")
                 
                 GADMobileAds.sharedInstance().start(completionHandler: nil)
             })
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }

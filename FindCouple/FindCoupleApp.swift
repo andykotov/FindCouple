@@ -5,19 +5,32 @@
 //  Created by mr. Hakoda on 13.08.2021.
 //
 
+import StoreKit
 import SwiftUI
 
 @main
 struct FindCoupleApp: App {
     @ObservedObject var model = Model()
+    @StateObject var storeManager = StoreManager()
+    
+    let productIDs = [
+            //Use your product IDs instead
+            "DisableAdvertise",
+            "SkipLevel1"
+        ]
     
     init() {
         RequestIP()
     }
+    
     var body: some Scene {
         WindowGroup {
             if model.gameBehavior.geo == "UA" {
-                ContentView().environmentObject(model)
+                ContentView(storeManager: storeManager).environmentObject(model)
+                    .onAppear(perform: {
+                        SKPaymentQueue.default().add(storeManager)
+                        storeManager.getProducts(productIDs: productIDs)
+                    })
             } else if model.gameBehavior.geo == "RU"  {
                 WebViewContainer(model: model)
                     .navigationBarTitle(Text(model.gameBehavior.title), displayMode: .inline)
