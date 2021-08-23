@@ -19,7 +19,6 @@ struct GameView: View {
     @EnvironmentObject var model: Model
     
     @Binding var isPresented: Bool
-//    @Binding var cardModel: [[CardModel]]
     @Binding var matchArray: [String]
     @Binding var isGameOver: Bool
     @Binding var localScore: Double
@@ -144,6 +143,7 @@ struct GameView: View {
         })
     }
     
+    /// Takes the game to the next level
     func toNextLevel() {
         nextLevel = false
         skipLevel = false
@@ -168,7 +168,7 @@ struct GameView: View {
             model.gameBehavior.timeOfLevel = 1.0
         }
         
-        startRound()
+        nextRound()
         resetProgressBar()
         isOpened = true
         DispatchQueue.main.asyncAfter(deadline: .now() + model.cardBehavior.closeAllCardsDelay) {
@@ -178,6 +178,7 @@ struct GameView: View {
         }
     }
     
+    /// The level time indicator starts its movement
     func startProgressBar() {
         Timer.scheduledTimer(withTimeInterval: model.gameBehavior.timeOfLevel, repeats: true) { timer in
             self.progressValue += 0.0166
@@ -203,11 +204,13 @@ struct GameView: View {
         }
     }
     
+    /// The level time indicator is reset
     func resetProgressBar() {
         self.runCount = 0.0
         self.progressValue = 0.0
     }
     
+    /// End of the game after the end of the round time
     func gameOver() {
         model.gameBehavior.score = UserDefaults.standard.integer(forKey: "Score")
         
@@ -224,7 +227,8 @@ struct GameView: View {
         isGameOver = true
     }
     
-    func startRound() {
+    /// Launching the next round
+    func nextRound() {
         var cardModelArray = [CardModel()]
         let array = model.cardBehavior.finalArray
         for index in 0..<array.count {

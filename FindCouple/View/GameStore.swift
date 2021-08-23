@@ -60,14 +60,5 @@ struct GameStore: View {
             .padding(.horizontal)
         }
         .navigationBarTitle("Магазин", displayMode: .inline)
-//        .toolbar(content: {
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                Button(action: {
-//                    //Restore products already purchased
-//                }) {
-//                    Text("Восстановить")
-//                }
-//            }
-//        })
     }
 }

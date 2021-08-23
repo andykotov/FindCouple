@@ -15,7 +15,6 @@ struct StartView: View {
     @State private var isShowingGameView = false
     @State private var isShowingGameStore = false
     @State var matchArray = [String()]
-//    @State var cardModel = [[CardModel()]]
     @State var isGameOver = false
     @State var localScore = 0.0
     
@@ -82,15 +81,13 @@ struct StartView: View {
             }
             .navigationBarTitle("Назад")
             .navigationBarHidden(true)
-            .onAppear(perform: {
-//                startRound()
-            })
             .sheet(isPresented: $isGameOver, onDismiss: resetGame) {
                 GameOver(isPresented: $isGameOver).environmentObject(model)
             }
         }
     }
     
+    /// Starts first round of the game
     func startRound() {
         var cardModelArray = [CardModel()]
         let array = model.cardBehavior.finalArray
@@ -106,6 +103,7 @@ struct StartView: View {
         model.cardBehavior.cardModel = chankedArray
     }
     
+    /// All game settings are set by default
     func resetGame() {
         model.gameBehavior.level = 1
         model.cardBehavior.closeAllCardsDelay = 3.0
