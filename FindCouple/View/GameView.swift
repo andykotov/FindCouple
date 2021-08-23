@@ -30,23 +30,38 @@ struct GameView: View {
     @State var progressValue: Double = 0.0
     @State var nextLevel = false
     @State var skipLevel = false
+    @State var runCount = 0.0
     
     var body: some View {
         GeometryReader { geo in
             VStack {
                 HStack {
-                    
-                    Button(action: {
-                    }) {
-                        Image(systemName: "timer")
-                            .foregroundColor(Color.white)
-                            .imageScale(.large)
-                            .frame(width: 24, height: 24, alignment: .center)
-                            .padding()
+                    if UserDefaults.standard.bool(forKey: "AdditionalTime30") {
+                        Button(action: {
+                            model.gameBehavior.isTimeIncreased = true
+                            UserDefaults.standard.setValue(false, forKey: "AdditionalTime30")
+                        }) {
+                            Image(systemName: "timer")
+                                .foregroundColor(Color.white)
+                                .imageScale(.large)
+                                .frame(width: 24, height: 24, alignment: .center)
+                                .padding()
+                        }
+                        .background(Color.green)
+                        .cornerRadius(10)
+                    } else {
+                        Button(action: {
+                        }) {
+                            Image(systemName: "timer")
+                                .foregroundColor(Color.white)
+                                .imageScale(.large)
+                                .frame(width: 24, height: 24, alignment: .center)
+                                .padding()
+                        }
+                        .background(Color.gray)
+                        .cornerRadius(10)
+                        .disabled(true)
                     }
-                    .background(Color.gray)
-                    .cornerRadius(10)
-                    .disabled(true)
                     
                     Text("\(Int(localScore / 2)) / \((model.cardBehavior.countCardRow * model.cardBehavior.countCardRow) / 2)")
                         .font(.title)
@@ -123,6 +138,7 @@ struct GameView: View {
         .onAppear(perform: {
             DispatchQueue.main.asyncAfter(deadline: .now() + model.cardBehavior.closeAllCardsDelay) {
                 isOpened = false
+                runCount = 0.0
                 startProgressBar()
             }
         })
@@ -135,7 +151,9 @@ struct GameView: View {
         model.gameBehavior.level += 1
         localScore = 0.0
         
-       if model.gameBehavior.level == 3 {
+        if model.gameBehavior.level == 2 {
+            model.gameBehavior.timeOfLevel = 0.5
+        } else if model.gameBehavior.level == 3 {
             model.gameBehavior.timeOfLevel = 1.0
             model.cardBehavior.countCardRow = 4
         } else if model.gameBehavior.level == 5 {
@@ -155,16 +173,22 @@ struct GameView: View {
         isOpened = true
         DispatchQueue.main.asyncAfter(deadline: .now() + model.cardBehavior.closeAllCardsDelay) {
             isOpened = false
+            runCount = 0.0
             startProgressBar()
         }
     }
     
     func startProgressBar() {
-        var runCount = 0.0
-
         Timer.scheduledTimer(withTimeInterval: model.gameBehavior.timeOfLevel, repeats: true) { timer in
             self.progressValue += 0.0166
             runCount += 0.0166
+            
+            if model.gameBehavior.isTimeIncreased {
+                timer.invalidate()
+                model.gameBehavior.timeOfLevel += 0.5
+                startProgressBar()
+                model.gameBehavior.isTimeIncreased = false
+            }
             
             if nextLevel || skipLevel {
                 timer.invalidate()
@@ -180,6 +204,7 @@ struct GameView: View {
     }
     
     func resetProgressBar() {
+        self.runCount = 0.0
         self.progressValue = 0.0
     }
     

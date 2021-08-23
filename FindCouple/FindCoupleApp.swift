@@ -15,6 +15,7 @@ struct FindCoupleApp: App {
     
     let productIDs = [
             //Use your product IDs instead
+            "AdditionalTime30",
             "DisableAdvertise",
             "SkipLevel1"
         ]

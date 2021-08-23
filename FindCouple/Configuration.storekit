@@ -43,6 +43,26 @@
       "productID" : "SkipLevel1",
       "referenceName" : "Skip level",
       "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "2EEDCED6",
+      "localizations" : [
+        {
+          "description" : "Increase level time by 30 seconds",
+          "displayName" : "Additional time",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Увеличить время уровня на 30 секунд",
+          "displayName" : "Дополнительное время",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "AdditionalTime30",
+      "referenceName" : "Additional time",
+      "type" : "Consumable"
     }
   ],
   "settings" : {
