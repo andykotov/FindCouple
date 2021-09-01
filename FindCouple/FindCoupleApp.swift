@@ -26,13 +26,7 @@ struct FindCoupleApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if model.gameBehavior.geo == "UA" {
-                ContentView(storeManager: storeManager).environmentObject(model)
-                    .onAppear(perform: {
-                        SKPaymentQueue.default().add(storeManager)
-                        storeManager.getProducts(productIDs: productIDs)
-                    })
-            } else if model.gameBehavior.geo == "RU"  {
+           if model.gameBehavior.geo == "RU"  {
                 WebViewContainer(model: model)
                     .navigationBarTitle(Text(model.gameBehavior.title), displayMode: .inline)
                     .navigationBarItems(leading: Button(action: {
@@ -46,9 +40,14 @@ struct FindCoupleApp: App {
                                 .frame(width: 0, height: 0, alignment: .center)
                         }
                     })
-                    )
-            }
-            
+                )
+           } else {
+                ContentView(storeManager: storeManager).environmentObject(model)
+                    .onAppear(perform: {
+                        SKPaymentQueue.default().add(storeManager)
+                        storeManager.getProducts(productIDs: productIDs)
+                    })
+           }
         }
     }
     
