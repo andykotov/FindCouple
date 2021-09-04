@@ -12,6 +12,7 @@
 		182E66F026CEEEBD00CF23C2 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182E66EF26CEEEBD00CF23C2 /* WebView.swift */; };
 		186290DA26CE77640072DDBE /* BunnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186290D926CE77640072DDBE /* BunnerView.swift */; };
 		18777CB526CC37230069CE71 /* GameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18777CB426CC37230069CE71 /* GameStore.swift */; };
+		18B630BD26E28C7300ACC412 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B630BC26E28C7300ACC412 /* LaunchView.swift */; };
 		18E6DC6B26C96CB100E5FE4F /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6DC6A26C96CB100E5FE4F /* GameOver.swift */; };
 		18F7187B26D02989002B3308 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F7187A26D02989002B3308 /* StoreKit.framework */; };
 		18F7187D26D029E7002B3308 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7187C26D029E7002B3308 /* StoreManager.swift */; };
@@ -48,6 +49,7 @@
 		182F25BF26D23E2000014A8F /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		186290D926CE77640072DDBE /* BunnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunnerView.swift; sourceTree = "<group>"; };
 		18777CB426CC37230069CE71 /* GameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStore.swift; sourceTree = "<group>"; };
+		18B630BC26E28C7300ACC412 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		18E6DC6A26C96CB100E5FE4F /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		18F7187A26D02989002B3308 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		18F7187C26D029E7002B3308 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		18F8B8E926C678840094A9EA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				18B630BC26E28C7300ACC412 /* LaunchView.swift */,
 				18F8B8EC26C679070094A9EA /* StartView.swift */,
 				18F8B8EE26C67FCD0094A9EA /* GameView.swift */,
 				18F8B8F426C68A420094A9EA /* CardRow.swift */,
@@ -282,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18F8B8EB26C678B80094A9EA /* Model.swift in Sources */,
+				18B630BD26E28C7300ACC412 /* LaunchView.swift in Sources */,
 				18777CB526CC37230069CE71 /* GameStore.swift in Sources */,
 				18F8B8F126C685140094A9EA /* Card.swift in Sources */,
 				18F8B8F526C68A420094A9EA /* CardRow.swift in Sources */,

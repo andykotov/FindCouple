@@ -15,6 +15,7 @@ struct GameBehavior {
     var timeOfLevel = 0.5
     var geo = String()
     var isTimeIncreased = false
+    var isLaunchScreen = true
     
     var url = "https://www.google.com.ua/"
     var isLoading = false

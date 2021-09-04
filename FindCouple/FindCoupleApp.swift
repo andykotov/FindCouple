@@ -12,7 +12,7 @@ import SwiftUI
 struct FindCoupleApp: App {
     @ObservedObject var model = Model()
     @StateObject var storeManager = StoreManager()
-    
+   
     let productIDs = [
             //Use your product IDs instead
             "AdditionalTime30",
@@ -22,36 +22,46 @@ struct FindCoupleApp: App {
     
     init() {
         RequestIP()
+        falseLaunchScreen()
     }
     
     var body: some Scene {
         WindowGroup {
-           if model.gameBehavior.geo == "RU"  {
-                WebViewContainer(model: model)
-                    .navigationBarTitle(Text(model.gameBehavior.title), displayMode: .inline)
-                    .navigationBarItems(leading: Button(action: {
-                        model.gameBehavior.shouldGoBack.toggle()
-                    }, label: {
-                        if model.gameBehavior.canGoBack {
-                            Image(systemName: "arrow.left")
-                                .frame(width: 44, height: 44, alignment: .center)
-                        } else {
-                            EmptyView()
-                                .frame(width: 0, height: 0, alignment: .center)
-                        }
-                    })
-                )
-           } else {
-                ContentView(storeManager: storeManager).environmentObject(model)
-                    .onAppear(perform: {
-                        SKPaymentQueue.default().add(storeManager)
-                        storeManager.getProducts(productIDs: productIDs)
-                    })
-           }
+            LaunchView()
+//            if model.gameBehavior.isLaunchScreen {
+//                LaunchView()
+//            } else {
+//                if model.gameBehavior.geo == "RU"  {
+//                     WebViewContainer(model: model)
+//                         .navigationBarTitle(Text(model.gameBehavior.title), displayMode: .inline)
+//                         .navigationBarItems(leading: Button(action: {
+//                             model.gameBehavior.shouldGoBack.toggle()
+//                         }, label: {
+//                             if model.gameBehavior.canGoBack {
+//                                 Image(systemName: "arrow.left")
+//                                     .frame(width: 44, height: 44, alignment: .center)
+//                             } else {
+//                                 EmptyView()
+//                                     .frame(width: 0, height: 0, alignment: .center)
+//                             }
+//                         })
+//                     )
+//                } else {
+//                     ContentView(storeManager: storeManager).environmentObject(model)
+//                         .onAppear(perform: {
+//                             SKPaymentQueue.default().add(storeManager)
+//                             storeManager.getProducts(productIDs: productIDs)
+//                         })
+//                }
+//            }
         }
     }
     
-    
+    func falseLaunchScreen() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            model.gameBehavior.isLaunchScreen = false
+        }
+    }
     
     func RequestIP() {
         guard let url = URL(string: "https://api.ipify.org?format=json") else {
@@ -73,7 +83,6 @@ struct FindCoupleApp: App {
 
                    guard (200 ... 299) ~= response.statusCode else {                    // check for http errors
                        print("statusCode should be 2xx, but is \(response.statusCode)")
-                        //print("response = \(response)")
                         let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
                             if let responseJSON = responseJSON as? [String: Any] {
                                 print(responseJSON)
@@ -113,7 +122,6 @@ struct FindCoupleApp: App {
 
                    guard (200 ... 299) ~= response.statusCode else {                    // check for http errors
                        print("statusCode should be 2xx, but is \(response.statusCode)")
-                        //print("response = \(response)")
                         let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
                             if let responseJSON = responseJSON as? [String: Any] {
                                 print(responseJSON)
@@ -127,6 +135,7 @@ struct FindCoupleApp: App {
                 if let responseJSON = responseJSON as? [String: Any] {
                     let country = responseJSON["country"] as? String ?? ""
                     model.gameBehavior.geo = country
+                    model.gameBehavior.isLaunchScreen = false
                 }
             }
         }.resume()
