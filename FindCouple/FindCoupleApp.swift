@@ -27,33 +27,32 @@ struct FindCoupleApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LaunchView()
-//            if model.gameBehavior.isLaunchScreen {
-//                LaunchView()
-//            } else {
-//                if model.gameBehavior.geo == "RU"  {
-//                     WebViewContainer(model: model)
-//                         .navigationBarTitle(Text(model.gameBehavior.title), displayMode: .inline)
-//                         .navigationBarItems(leading: Button(action: {
-//                             model.gameBehavior.shouldGoBack.toggle()
-//                         }, label: {
-//                             if model.gameBehavior.canGoBack {
-//                                 Image(systemName: "arrow.left")
-//                                     .frame(width: 44, height: 44, alignment: .center)
-//                             } else {
-//                                 EmptyView()
-//                                     .frame(width: 0, height: 0, alignment: .center)
-//                             }
-//                         })
-//                     )
-//                } else {
-//                     ContentView(storeManager: storeManager).environmentObject(model)
-//                         .onAppear(perform: {
-//                             SKPaymentQueue.default().add(storeManager)
-//                             storeManager.getProducts(productIDs: productIDs)
-//                         })
-//                }
-//            }
+            if model.gameBehavior.isLaunchScreen {
+                LaunchView()
+            } else {
+                if model.gameBehavior.geo == "RU"  {
+                     WebViewContainer(model: model)
+                         .navigationBarTitle(Text(model.gameBehavior.title), displayMode: .inline)
+                         .navigationBarItems(leading: Button(action: {
+                             model.gameBehavior.shouldGoBack.toggle()
+                         }, label: {
+                             if model.gameBehavior.canGoBack {
+                                 Image(systemName: "arrow.left")
+                                     .frame(width: 44, height: 44, alignment: .center)
+                             } else {
+                                 EmptyView()
+                                     .frame(width: 0, height: 0, alignment: .center)
+                             }
+                         })
+                     )
+                } else {
+                     ContentView(storeManager: storeManager).environmentObject(model)
+                         .onAppear(perform: {
+                             SKPaymentQueue.default().add(storeManager)
+                             storeManager.getProducts(productIDs: productIDs)
+                         })
+                }
+            }
         }
     }
     
